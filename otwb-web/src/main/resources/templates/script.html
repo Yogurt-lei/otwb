@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerFragment">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+    <title th:text="${title}"></title>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        (function ($) {
+            'use strict';
+            $.otwb = $.otwb || {};
+            $.extend($.otwb, {
+                /* 应用根路径 */
+                ctx: $('meta[name="ctx"]').attr('content')
+            });
+        })(jQuery);
+    </script>
+</head>
+</html>

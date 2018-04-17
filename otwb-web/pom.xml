@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>otwb-web</artifactId>
+    <packaging>jar</packaging>
+    <name>otwb-web</name>
+    <description>package about otwb-web</description>
+
+    <!--extend from parent-->
+    <parent>
+        <groupId>com.yogurt</groupId>
+        <artifactId>otwb</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <!--依赖其他必要模块-->
+        <dependency>
+            <groupId>com.yogurt</groupId>
+            <artifactId>otwb-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yogurt</groupId>
+            <artifactId>otwb-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yogurt</groupId>
+            <artifactId>otwb-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yogurt</groupId>
+            <artifactId>otwb-utils</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>otwb-starter</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--指定该Main Class为全局的唯一入口-->
+                    <mainClass>com.yogurt.WebApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--可以把依赖的包都打包到生成的Jar包中-->
+                            <goal>repackage</goal>
+                        </goals>
+                        <!--可以生成不含依赖包的不可执行Jar包-->
+                        <!-- configuration>
+                          <classifier>exec</classifier>
+                        </configuration> -->
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>    <!--默认关掉单元测试 -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
