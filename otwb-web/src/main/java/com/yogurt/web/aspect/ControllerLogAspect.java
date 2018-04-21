@@ -1,7 +1,5 @@
 package com.yogurt.web.aspect;
 
-import com.sun.xml.internal.bind.v2.TODO;
-import com.yogurt.utils.common.web.http.HttpClientUtils;
 import com.yogurt.utils.common.web.http.ServletUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -11,8 +9,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +26,7 @@ public class ControllerLogAspect {
 
     private static final ThreadLocal<StopWatch> stopWatch = new ThreadLocal<>();
 
-    private static ExecutorService excutor = Executors.newFixedThreadPool(5);
+    private static ExecutorService executor = Executors.newFixedThreadPool(5);
 
     /**
      * 定义切入点 所有的Controller
@@ -70,7 +66,7 @@ public class ControllerLogAspect {
         final HttpServletRequest request = ServletUtils.getRequest();
         final String userAgent = request.getHeader("User-Agent");
 
-        excutor.execute(() -> {
+        executor.execute(() -> {
             synchronized (this) {
                 // TODO by Yogurt_lei on 2018-04-19 22:49 : 日志写入数据库
             }

@@ -1,6 +1,6 @@
-package com.yogurt.model.global.vo;
+package com.yogurt.model.vo.global;
 
-import com.yogurt.model.global.ViewObject;
+import com.yogurt.model.vo.ViewObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,17 +17,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @ApiModel(description = "版本信息")
-public class Version extends ViewObject {
+public class VersionVO extends ViewObject {
 
-    /**
-     * 前缀
-     */
-    @ApiModelProperty("前缀")
-    private String prefix;
+    @ApiModelProperty("版本信息")
+    private String version;
 
-    /**
-     * 后缀
-     */
-    @ApiModelProperty("后缀")
-    private String suffix;
+
 }

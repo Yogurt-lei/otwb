@@ -1,4 +1,4 @@
-package com.yogurt.model.global;
+package com.yogurt.model.vo;
 
 /**
  * 响应结果码定义

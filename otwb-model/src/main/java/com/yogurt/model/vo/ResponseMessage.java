@@ -1,4 +1,4 @@
-package com.yogurt.model.global;
+package com.yogurt.model.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "响应数据")
+@ApiModel(description = "响应消息")
 public class ResponseMessage {
 
     /**

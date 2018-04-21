@@ -1,6 +1,6 @@
 # global user config
 system:
-  version: 0.1
+  version: 1.0.1-SNAPSHOT
 
 server:
   port: 8080
@@ -9,12 +9,24 @@ server:
 
 # default logger config
 logging:
-  config: classpath:logback.xml
+  level:
+    root: debug
+    springfox.documentation: warn
+    org.springframework: warn
+    org.hibernate: warn
+    org.thymeleaf: warn
+    org.apache: warn
+    org.quartz: warn
+    io.swagger: warn
+    org.zbus: warn
+    sun.rmi: warn
+  file: ./otwb.log
 
 spring:
+  # default druid config
   datasource:
     name: druid
-    url: jdbc:mysql://localhost:3306/chjwms?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver
@@ -43,24 +55,49 @@ spring:
     resetStatEnable: false
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=10000
+# default multipart upload config
   servlet:
     multipart:
       enabled: true
       max-request-size: 50MB
       max-file-size: 50MB
-      location: E:\\
+# default thymeleaf config
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
-  jpa:
-    open-in-view: true
-    show-sql: true
-    database: mysql
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        show_sql: true
+
+# default mybatis config
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.yogurt.model.entity
+
+# default pagehelper config
+# see https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md
+pagehelper:
+  # 分页合理化参数 <=0查询第一页 >=pages查询最后一页
+  reasonable: true
+  autoRuntimeDialect: true
+  support-methods-arguments: true
+  params: pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
+  row-bounds-with-count: true
+  pageSizeZero: true
+
+# default tk mybatis mapper config
+mapper:
+  # <selectKey>中的order属性 执行SQL的返回主键时机, oracle为BEFORE MySQL为AFTER
+  before: false
+  identity: MYSQL
+  # insertSelective 和 updateByPrimaryKeySelective 中，是否判断字符串类型 !=''。
+  not-empty: true
+  style: camelhumpAndUppercase
+  use-simple-type: true
+  # 校验通用 Example 构造参数 entityClass 是否和当前调用的 Mapper<EntityClass> 类型一致。
+  check-example-entity-class: true
+  # 必须设置查询条件才能删除和更新
+  safe-delete: true
+  safe-update: true
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    - tk.mybatis.mapper.common.MySqlMapper #mysql特有

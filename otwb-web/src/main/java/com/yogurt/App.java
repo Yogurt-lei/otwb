@@ -2,17 +2,19 @@ package com.yogurt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import tk.mybatis.spring.annotation.MapperScan;
 
-@SpringBootApplication
-public class WebApplication {
+@MapperScan(basePackages = "com.yogurt.dao.mapper")
+@EnableTransactionManagement
+@SpringBootApplication(exclude = {MultipartAutoConfiguration.class})
+public class App {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 
     /**

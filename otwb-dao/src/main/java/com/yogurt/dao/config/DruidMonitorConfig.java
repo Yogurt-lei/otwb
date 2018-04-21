@@ -45,6 +45,13 @@ public class DruidMonitorConfig {
         return bean;
     }
 
+    /**
+     *
+     * 加载Druid配置信息
+     *
+     * @author Yogurt_lei
+     * @date 2018-04-21 14:16
+     */
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource(){
