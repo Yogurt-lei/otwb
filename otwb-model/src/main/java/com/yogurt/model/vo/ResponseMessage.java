@@ -28,5 +28,11 @@ public class ResponseMessage {
      * 返回数据
      */
     @ApiModelProperty("数据")
-    private ViewObject data;
+    private Object data;
+
+    public ResponseMessage(ResultCode resultCode, Object data) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
+        this.data = data;
+    }
 }

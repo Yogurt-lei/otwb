@@ -7,26 +7,10 @@
     <name>otwb-model</name>
     <description>package about otwb-model</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-core</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
     <!--extend from parent-->
     <parent>
         <groupId>com.yogurt</groupId>
         <artifactId>otwb</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
 </project>

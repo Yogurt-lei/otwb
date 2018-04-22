@@ -4,7 +4,8 @@ package com.yogurt.model.vo;
  * 响应结果码定义
  */
 public enum ResultCode {
-    SUCCESS(0, "成功");
+    SUCCESS(0, "成功"),
+    FAILED(-1, "失败");
 
     private int code;
     private String msg;
