@@ -18,19 +18,6 @@
         <druid.version>1.1.9</druid.version>
         <pagehelper.version>1.2.4</pagehelper.version>
         <tk.mybatis.version>2.0.1</tk.mybatis.version>
-        <mybatis-starter.version>1.3.2</mybatis-starter.version>
-
-        <!--mybatis-generator config-->
-        <mybatis-generator.version>1.3.6</mybatis-generator.version>
-        <mybatis-generator.location>${basedir}/src/main/resources/generator/generatorConfig.xml
-        </mybatis-generator.location>
-        <mybatis-generator.driver>${basedir}/src/main/resources/generator/mysql-connector-java-5.1.46.jar
-        </mybatis-generator.driver>
-        <mybatis-generator.output>${basedir}/generator</mybatis-generator.output>
-        <jdbc.driverClass>com.mysql.jdbc.Driver</jdbc.driverClass>
-        <jdbc.url>jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8</jdbc.url>
-        <jdbc.userId>root</jdbc.userId>
-        <jdbc.password>root</jdbc.password>
     </properties>
 
     <dependencies>
@@ -48,11 +35,6 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.mybatis.spring.boot</groupId>-->
-            <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
-            <!--<version>${mybatis-starter.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
@@ -64,33 +46,16 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.6</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>${mybatis-generator.version}</version>
-                <configuration>
-                    <!--配置文件的路径-->
-                    <configurationFile>${mybatis-generator.location}</configurationFile>
-                    <overwrite>true</overwrite>
-                    <verbose>true</verbose>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>tk.mybatis</groupId>
-                        <artifactId>mapper</artifactId>
-                        <version>4.0.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

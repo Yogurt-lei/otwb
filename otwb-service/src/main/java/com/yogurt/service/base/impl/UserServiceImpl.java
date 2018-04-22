@@ -5,6 +5,7 @@ import com.yogurt.model.entity.base.User;
 import com.yogurt.service.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(User user) {
-        return userMapper.insert(user);
+    @Transactional
+    public boolean addUser(User user) {
+        return userMapper.insertSelective(user) > 0;
     }
 }

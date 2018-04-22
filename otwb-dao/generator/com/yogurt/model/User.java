@@ -1,9 +1,9 @@
-package com.yogurt.model.entity.base;
+package com.yogurt.model;
 
 import com.yogurt.model.entity.BaseModel;
-import lombok.Data;
-
 import javax.persistence.*;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Table(name = "`dev_user`")

@@ -86,8 +86,8 @@ pagehelper:
 
 # default tk mybatis mapper config
 mapper:
-  # <selectKey>中的order属性 执行SQL的返回主键时机, oracle为BEFORE MySQL为AFTER
-  before: false
+  # <selectKey>中的order属性 执行SQL的返回主键时机, oracle为BEFORE MySQL为AFTER 由于采用uuid 所有都是before了
+  before: true
   identity: MYSQL
   # insertSelective 和 updateByPrimaryKeySelective 中，是否判断字符串类型 !=''。
   not-empty: true

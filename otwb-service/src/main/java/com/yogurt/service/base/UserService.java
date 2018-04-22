@@ -11,7 +11,7 @@ import java.util.List;
  * @version v1.0 , 2018-04-21 15:07
  */
 public interface UserService {
-    int addUser(User user);
+    boolean addUser(User user);
 
     List<User> findAllUser(int pageNum, int pageSize);
 }

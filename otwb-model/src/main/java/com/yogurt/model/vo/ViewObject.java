@@ -12,13 +12,11 @@ import java.io.Serializable;
  * @version v1.0 , 2018-04-16 23:40
  */
 @ApiModel(description = "页面对象")
-public class ViewObject implements Serializable {
+public interface ViewObject<T> extends Serializable {
 
     /**
      * VO to PO
      * BeanUtils.copyProperties 效率极低 不建议使用
      */
-    public BaseModel toEntity() {
-        return null; // 子类覆写
-    }
+    BaseModel toEntity();
 }

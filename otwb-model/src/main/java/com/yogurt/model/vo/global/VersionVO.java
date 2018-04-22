@@ -1,5 +1,6 @@
 package com.yogurt.model.vo.global;
 
+import com.yogurt.model.entity.BaseModel;
 import com.yogurt.model.vo.ViewObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,10 +18,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @ApiModel(description = "版本信息")
-public class VersionVO extends ViewObject {
+public class VersionVO implements ViewObject {
 
     @ApiModelProperty("版本信息")
     private String version;
 
 
+    @Override
+    public BaseModel toEntity() {
+        return null;
+    }
 }

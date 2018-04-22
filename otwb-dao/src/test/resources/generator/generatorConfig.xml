@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="${mybatis-generator.driver}"/>
+    <!--读取mybatis参数 自己加载对应的驱动-->
+    <classPathEntry location="F:\IDEA_WorkSpace\otwb\otwb-dao\src\test\resources\generator\mysql-connector-java-5.1.46.jar"/>
 
     <context id="MySQL" defaultModelType="flat" targetRuntime="MyBatis3Simple">
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -12,42 +13,43 @@
         <!--<property name="useMapperCommentGenerator" value="false"/>-->
 
         <!--通用 Mapper 插件，可以生成带注解的实体类-->
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+        <plugin type="MyBatisPlugin">
             <property name="mappers" value="com.yogurt.dao.config.DefaultMySqlMapper"/>
             <property name="caseSensitive" value="true"/>
-            <property name="forceAnnotation" value="true"/>
             <property name="beginningDelimiter" value="`"/>
             <property name="endingDelimiter" value="`"/>
         </plugin>
 
         <!--数据库链接配置-->
-        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.url}" userId="${jdbc.userId}" password="${jdbc.password}"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8" userId="root" password="root"/>
 
-        <!--MyBatis 生成器只需要生成 Model-->
+        <!--生成Model的包名和位置-->
         <javaModelGenerator targetPackage="com.yogurt.model" targetProject="generator">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.yogurt.model.entity.BaseModel"/>
         </javaModelGenerator>
 
-        <!-- 生成mapper的包名和位置 -->
-        <sqlMapGenerator targetPackage="com.yogurt.mapper" targetProject="generator">
+        <!-- 生成sql xml的包名和位置 -->
+        <sqlMapGenerator targetPackage="com.yogurt.xml" targetProject="generator">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <!-- 生成mapper.xml的包名和位置 ANNOTATEDMAPPER 或者XMLMAPPER-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yogurt.xml" targetProject="generator">
+        <!-- 生成mapper的包名和位置 ANNOTATEDMAPPER 或者XMLMAPPER-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yogurt.mapper" targetProject="generator">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!-- 要生成哪些表 %表示所有 可以指定单表-->
-        <table tableName="%">
+        <table tableName="DEV_%">
             <!--mysql 配置-->
-            <generatedKey column="id" sqlStatement="JDBC"/>
+            <generatedKey column="id" sqlStatement="SELECT REPLACE(UUID(),''-'','''') UUID FROM DUAL"/>
             <!--oracle 配置-->
             <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
-            <!--所有DEV_开头的全部去除前缀-->
-            <columnRenamingRule searchString="^DEV_" replaceString="" />
+            <!--所有表DEV_开头的全部去除前缀-->
+            <domainObjectRenamingRule searchString="^(DEV|dev)" replaceString="" />
+            <!--所有列DEV_开头的全部去除前缀-->
+            <columnRenamingRule searchString="^(DEV|dev)" replaceString="" />
         </table>
     </context>
 </generatorConfiguration>
