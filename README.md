@@ -2,12 +2,11 @@ otwb
 2018-4-17 21:31:26 start coding
 
 
-
 #### RESTful APIs
 here is [api-docs](http://localhost:8080/otwb/swagger-ui.html)
 
 
-
+*在接口中没有body和form的混合参数则全用@ApiImplicitParams，若有混合则混合使用@ApiImplicitParams和@ApiParam*
 
 ### Git 全局设置技巧
 
