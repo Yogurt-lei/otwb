@@ -24,7 +24,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8" userId="root" password="root"/>
 
         <!--生成Model的包名和位置-->
-        <javaModelGenerator targetPackage="com.yogurt.model" targetProject="generator">
+        <javaModelGenerator targetPackage="com.yogurt.model.entity.base" targetProject="generator">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.yogurt.model.entity.BaseModel"/>
@@ -36,7 +36,7 @@
         </sqlMapGenerator>
 
         <!-- 生成mapper的包名和位置 ANNOTATEDMAPPER 或者XMLMAPPER-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yogurt.mapper" targetProject="generator">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yogurt.dao.mapper.base" targetProject="generator">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

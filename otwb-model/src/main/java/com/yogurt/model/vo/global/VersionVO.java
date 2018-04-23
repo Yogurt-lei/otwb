@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @ApiModel(description = "版本信息")
-public class VersionVO implements ViewObject {
+public class VersionVO extends ViewObject {
 
     @ApiModelProperty("版本信息")
     private String version;
