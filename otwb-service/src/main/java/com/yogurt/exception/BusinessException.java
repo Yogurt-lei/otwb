@@ -1,4 +1,4 @@
-package com.yogurt.web.exception;
+package com.yogurt.exception;
 
 /**
  * BusinessException 业务异常
@@ -8,4 +8,8 @@ package com.yogurt.web.exception;
  */
 public class BusinessException extends RuntimeException {
     public static final String MESSAGE = "业务异常";
+
+    public BusinessException(String message) {
+        super(message);
+    }
 }

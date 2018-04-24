@@ -1,4 +1,4 @@
-package com.yogurt.model.vo;
+package com.yogurt.web.response;
 
 /**
  * 响应结果码定义
@@ -8,7 +8,8 @@ public enum ResultCode {
     FAILED(-1, "失败"),
 
     METHOD_ARGUMENT_NOT_VALID(101, "数据校验异常"),
-    BUSINESS_ERROR(102, "业务异常");
+    BUSINESS_ERROR(102, "业务异常"),
+    DAO_ERROR(103, "数据库操作异常");
 
     private int code;
     private String msg;

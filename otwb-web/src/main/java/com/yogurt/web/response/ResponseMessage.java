@@ -1,4 +1,4 @@
-package com.yogurt.model.vo;
+package com.yogurt.web.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

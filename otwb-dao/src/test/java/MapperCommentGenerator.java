@@ -129,9 +129,9 @@ public class MapperCommentGenerator extends DefaultCommentGenerator {
         }
 
         //当字段数据类型为date时添加日期注释
-        if(introspectedColumn.getJdbcType() == 93) {
-            field.addAnnotation("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
-        }
+        // if(introspectedColumn.getJdbcType() == 93) {
+        //     field.addAnnotation("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+        // }
 
     }
 

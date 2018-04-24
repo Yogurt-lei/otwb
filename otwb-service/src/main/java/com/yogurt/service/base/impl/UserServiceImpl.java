@@ -24,41 +24,45 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
-    public boolean addUser(UserVO userVO) {
+    public boolean addEntity(UserVO userVO) {
         return userMapper.insertSelective(userVO.toEntity()) > 0;
     }
 
     @Override
-    public boolean deleteUser(UserVO userVO) {
+    public boolean deleteEntity(UserVO userVO) {
         return userMapper.delete(userVO.toEntity()) > 0;
     }
 
     @Override
-    public boolean deleteUserById(String id) {
+    public boolean deleteEntityById(String id) {
         return userMapper.deleteByPrimaryKey(id) > 0;
     }
 
     @Override
-    public boolean updateUser(UserVO userVO) {
+    public boolean updateEntity(UserVO userVO) {
         return userMapper.updateByPrimaryKeySelective(userVO.toEntity()) > 0;
     }
 
     @Override
-    public UserVO findUserById(String id) {
+    public UserVO findEntityById(String id) {
         return userMapper.selectByPrimaryKey(id).toVO();
     }
 
     @Override
-    public List<UserVO> findUserListByPage(int pageNum, int pageSize) {
+    public PageInfo<UserVO> findEntityListByPage(int pageNum, int pageSize) {
         PageInfo<User> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userMapper
                 .selectAll());
-        List<UserVO> userList = new ArrayList<>();
+        List<UserVO> userVOList = new ArrayList<>();
 
         for (User user : pageInfo.getList()) {
-            userList.add(user.toVO());
+            userVOList.add(user.toVO());
         }
+        PageInfo<UserVO> voPageInfo = new PageInfo<>();
+        voPageInfo.setList(userVOList);
+        voPageInfo.setTotal(pageInfo.getTotal());
 
-        return userList;
+        return voPageInfo;
     }
 }

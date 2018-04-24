@@ -1,8 +1,8 @@
-package com.yogurt.web.controller.base;
+package com.yogurt.web.controller.global;
 
 import com.github.pagehelper.PageInfo;
-import com.yogurt.model.vo.base.UserVO;
-import com.yogurt.service.base.UserService;
+import com.yogurt.model.vo.global.VersionVO;
+import com.yogurt.service.global.VersionService;
 import com.yogurt.web.controller.BaseController;
 import com.yogurt.web.response.ResponseMessage;
 import com.yogurt.web.response.ResultCode;
@@ -15,74 +15,64 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * UserController
+ * VersionController
  *
  * @author <a href="yogurt_lei@foxmail.com">Yogurt_lei</a>
- * @version v1.0 , 2018-04-21 15:08
+ * @version v1.0 , 2018-04-16 21:43
  */
-@Api(tags = "用户信息")
+@Api(tags = "版本信息")
 @RestController
-public class UserController extends BaseController {
+public class VersionController extends BaseController {
     @Autowired
-    private UserService userService;
+    private VersionService versionService;
 
-    @ApiOperation(value = "添加用户.", response = ResponseMessage.class)
-    @PostMapping(value = "/base/user/",
+    @ApiOperation(value = "添加版本.", response = ResponseMessage.class)
+    @PostMapping(value = "/global/version",
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
             consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseMessage addUser(@RequestBody UserVO userVO) {
-        if (userService.addEntity(userVO)) {
+    public ResponseMessage addUser(@RequestBody VersionVO versionVO) {
+        if (versionService.addEntity(versionVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
             return new ResponseMessage(ResultCode.FAILED, false);
         }
     }
 
-    @ApiOperation(value = "根据ID删除用户.", response = ResponseMessage.class)
-    @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
-    @ResponseBody
-    @DeleteMapping("/base/user/{id}")
-    public ResponseMessage deleteUserById(@PathVariable String id) {
-        if (userService.deleteEntityById(id)) {
-            return new ResponseMessage(ResultCode.SUCCESS, true);
-        } else {
-            return new ResponseMessage(ResultCode.FAILED, false);
-        }
-    }
-
-    @ApiOperation(value = "更新用户.", response = ResponseMessage.class)
+    @ApiOperation(value = "根据Id更新版本.", response = ResponseMessage.class)
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     })
     @ResponseBody
-    @PutMapping("/base/user/{id}")
-    public ResponseMessage updateUser(@PathVariable String id, @RequestBody UserVO userVO) {
-        if (userService.updateEntity(userVO)) {
+    @PutMapping("/global/version/{id}")
+    public ResponseMessage updateUser(@PathVariable String id, @RequestBody VersionVO versionVO) {
+        versionVO.setId(id);
+        if (versionService.updateEntity(versionVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
             return new ResponseMessage(ResultCode.FAILED, false);
         }
     }
 
-    @ApiOperation(value = "根据ID查找用户.", response = ResponseMessage.class)
+    @ApiOperation(value = "根据ID查找版本.", response = ResponseMessage.class)
     @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     @ResponseBody
-    @GetMapping("/base/user/{id}")
+    @GetMapping("/global/version/{id}")
     public ResponseMessage findUserById(@PathVariable String id) {
-        UserVO userVO = userService.findEntityById(id);
-        return new ResponseMessage(ResultCode.SUCCESS, userVO);
+        VersionVO versionVO = versionService.findEntityById(id);
+        return new ResponseMessage(ResultCode.SUCCESS, versionVO);
     }
 
-    @ApiOperation(value = "分页查找用户.", response = ResponseMessage.class)
+    @ApiOperation(value = "分页查找版本.", response = ResponseMessage.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "pageNum", dataType = "int", paramType = "form"),
             @ApiImplicitParam(name = "pageSize", value = "pageSize", dataType = "int", paramType = "form")
     })
     @ResponseBody
-    @GetMapping("/base/userList")
+    @GetMapping("/global/versionList")
     public ResponseMessage findUserListByPage(@RequestParam(required = false, defaultValue = "1") int pageNum,
                                               @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        PageInfo<UserVO> pageInfo = userService.findEntityListByPage(pageNum, pageSize);
+        PageInfo<VersionVO> pageInfo = versionService.findEntityListByPage(pageNum, pageSize);
         return new ResponseMessage(ResultCode.SUCCESS, pageInfo);
     }
 }
+

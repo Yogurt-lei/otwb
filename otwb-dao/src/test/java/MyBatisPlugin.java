@@ -145,15 +145,19 @@ public class MyBatisPlugin extends PluginAdapter {
 
         for (Field field : topLevelClass.getFields()) {
             Field fieldVO = new Field(field.getName(), field.getType());
-            String commentBuilder = "";
-            List<String> javaDocLines = field.getJavaDocLines();
-            String comment = javaDocLines.stream().collect(Collectors.joining());
-            comment = StringUtils.replaceAll(comment, "(\\s+|\\*|/)", "");
+            if (field.getName().equals("id")) {
+                fieldVO.addAnnotation("@ApiModelProperty(hidden = true)");
+            } else {
+                String commentBuilder = "";
+                List<String> javaDocLines = field.getJavaDocLines();
+                String comment = javaDocLines.stream().collect(Collectors.joining());
+                comment = StringUtils.replaceAll(comment, "(\\s+|\\*|/)", "");
 
-            fieldVO.addAnnotation("@ApiModelProperty(\""+comment+"\")");
+                fieldVO.addAnnotation("@ApiModelProperty(\""+comment+"\")");
 
-            if ("Date".equals(field.getType().getShortName())) {
-                fieldVO.addAnnotation("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+                // if ("Date".equals(field.getType().getShortName())) {
+                //     fieldVO.addAnnotation("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+                // }
             }
             viewObject.addField(fieldVO);
         }

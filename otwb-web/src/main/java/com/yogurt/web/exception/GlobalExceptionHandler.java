@@ -1,14 +1,15 @@
 package com.yogurt.web.exception;
 
-import com.yogurt.model.vo.ResponseMessage;
-import com.yogurt.model.vo.ResultCode;
+import com.mysql.jdbc.MysqlDataTruncation;
+import com.yogurt.exception.BusinessException;
+import com.yogurt.web.response.ResponseMessage;
+import com.yogurt.web.response.ResultCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.binding.BindingException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseMessage exception(HttpServletRequest request, HttpServletResponse response, Model model, Exception e) {
-        log.error("catch exception!!!", e);
+        log.error("catch undefined exception!!!", e);
         return new ResponseMessage(ResultCode.FAILED, e.getMessage());
     }
 
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     ResponseMessage handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
-        log.error("validation failed!!!",e);
+        log.error("catch api-validation failed!!!",e);
         return new ResponseMessage(ResultCode.METHOD_ARGUMENT_NOT_VALID, e.getMessage());
     }
 
@@ -52,5 +53,15 @@ public class GlobalExceptionHandler {
     public ResponseMessage handleBusinessException(BusinessException e){
         log.error("catch business exception!!!", e);
         return new ResponseMessage(ResultCode.BUSINESS_ERROR, e.getMessage());
+    }
+
+    /**
+     * 处理所有数据库操作异常 CRUD异常
+     */
+    @ExceptionHandler(MysqlDataTruncation.class)
+    @ResponseBody
+    public ResponseMessage handleMysqlDataTruncation(BindingException e){
+        log.error("catch database operation exception!!!", e);
+        return new ResponseMessage(ResultCode.DAO_ERROR, e.getMessage());
     }
 }
