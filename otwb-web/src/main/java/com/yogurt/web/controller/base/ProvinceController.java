@@ -30,7 +30,7 @@ public class ProvinceController extends BaseController {
     @PostMapping(value = "/base/province",
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
             consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseMessage addUser(@RequestBody ProvinceVO provinceVO) {
+    public ResponseMessage addProvince(@RequestBody ProvinceVO provinceVO) {
         if (provinceService.addEntity(provinceVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
@@ -42,7 +42,7 @@ public class ProvinceController extends BaseController {
     @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     @ResponseBody
     @DeleteMapping("/base/province/{id}")
-    public ResponseMessage deleteUserById(@PathVariable String id) {
+    public ResponseMessage deleteProvinceById(@PathVariable String id) {
         if (provinceService.deleteEntityById(id)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
@@ -56,7 +56,7 @@ public class ProvinceController extends BaseController {
     })
     @ResponseBody
     @PutMapping("/base/province/{id}")
-    public ResponseMessage updateUser(@PathVariable String id, @RequestBody ProvinceVO provinceVO) {
+    public ResponseMessage updateProvince(@PathVariable String id, @RequestBody ProvinceVO provinceVO) {
         if (provinceService.updateEntity(provinceVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
@@ -68,7 +68,7 @@ public class ProvinceController extends BaseController {
     @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     @ResponseBody
     @GetMapping("/base/province/{id}")
-    public ResponseMessage findUserById(@PathVariable String id) {
+    public ResponseMessage findProvinceById(@PathVariable String id) {
         ProvinceVO provinceVO = provinceService.findEntityById(id);
         return new ResponseMessage(ResultCode.SUCCESS, provinceVO);
     }
@@ -80,7 +80,7 @@ public class ProvinceController extends BaseController {
     })
     @ResponseBody
     @GetMapping("/base/provinceList")
-    public ResponseMessage findUserListByPage(@RequestParam(required = false, defaultValue = "1") int pageNum,
+    public ResponseMessage findProvinceListByPage(@RequestParam(required = false, defaultValue = "1") int pageNum,
                                               @RequestParam(required = false, defaultValue = "10") int pageSize) {
         PageInfo<ProvinceVO> pageInfo = provinceService.findEntityListByPage(pageNum, pageSize);
         return new ResponseMessage(ResultCode.SUCCESS, pageInfo);

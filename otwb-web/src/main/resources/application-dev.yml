@@ -3,6 +3,12 @@ server:
   servlet:
     context-path: /otwb
 
+# system customized config
+otwb:
+  config:
+    model: otwb
+    enable-captcha: false
+
 # default logger config
 logging:
   level:

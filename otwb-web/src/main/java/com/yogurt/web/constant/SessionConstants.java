@@ -11,4 +11,13 @@ public interface SessionConstants {
      * 当前登录用户ID
      */
     String CURRENT_USER_ID = "CURRENT_USER_ID";
+    /**
+     * 验证码
+     */
+    String CAPTCHA = "CAPTCHA";
+    /**
+     * 国际化 中文英文
+     */
+    String ZH_LANG = "zh";
+    String EN_LANG = "en";
 }

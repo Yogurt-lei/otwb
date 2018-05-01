@@ -52,7 +52,7 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "更新用户.", response = ResponseMessage.class)
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     })
     @ResponseBody
     @PutMapping("/base/user/{id}")
@@ -84,5 +84,17 @@ public class UserController extends BaseController {
                                               @RequestParam(required = false, defaultValue = "10") int pageSize) {
         PageInfo<UserVO> pageInfo = userService.findEntityListByPage(pageNum, pageSize);
         return new ResponseMessage(ResultCode.SUCCESS, pageInfo);
+    }
+
+    @GetMapping("/userLogin")
+    public ResponseMessage userLogin(@RequestParam String account,
+                            @RequestParam String password) {
+        System.out.println(account + "->" + password);
+        return new ResponseMessage(ResultCode.SUCCESS, "ok");
+    }
+
+    @GetMapping("/userInfo")
+    public String userInfo() {
+        return "userInfo";
     }
 }

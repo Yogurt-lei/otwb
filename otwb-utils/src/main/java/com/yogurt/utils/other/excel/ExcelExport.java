@@ -4,13 +4,12 @@
 package com.yogurt.utils.other.excel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.yogurt.utils.common.codec.EncodeUtils;
-import com.yogurt.utils.common.collect.ListUtils;
-import com.yogurt.utils.common.lang.ObjectUtils;
-import com.yogurt.utils.common.lang.StringUtils;
 import com.yogurt.utils.common.reflect.ReflectUtils;
 import com.yogurt.utils.other.excel.annotation.ExcelField;
+import com.yogurt.utils.other.excel.annotation.ExcelField.Align;
+import com.yogurt.utils.other.excel.annotation.ExcelField.Type;
 import com.yogurt.utils.other.excel.annotation.ExcelFields;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
@@ -18,11 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.yogurt.utils.other.excel.annotation.ExcelField.Type;
-import com.yogurt.utils.other.excel.annotation.ExcelField.Align;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -182,7 +178,7 @@ public class ExcelExport {
      * @param groups 导入分组
      */
     public void createSheet(String sheetName, String title, Class<?> cls, Type type, String... groups) {
-        this.annotationList = ListUtils.newArrayList();
+        this.annotationList = new ArrayList<>();
         // Get annotation field
         Field[] fs = cls.getDeclaredFields();
         for (Field f : fs) {
@@ -218,8 +214,8 @@ public class ExcelExport {
             ;
         });
         // Initialize
-        List<String> headerList = ListUtils.newArrayList();
-        List<Integer> headerWidthList = ListUtils.newArrayList();
+        List<String> headerList = new ArrayList<>();
+        List<Integer> headerWidthList = new ArrayList<>();
         for (Object[] os : annotationList) {
             ExcelField ef = (ExcelField) os[0];
             String headerTitle = ef.title();
@@ -482,7 +478,7 @@ public class ExcelExport {
 //			}
         } catch (Exception ex) {
             log.info("Set cell value [" + row.getRowNum() + "," + column + "] error: " + ex.toString());
-            cell.setCellValue(ObjectUtils.toString(val));
+            cell.setCellValue(val.toString());
         }
         return cell;
     }
@@ -527,7 +523,8 @@ public class ExcelExport {
                 String dataFormat = ef.dataFormat();
                 try {
                     // 获取Json格式化注解的格式化参数
-                    JsonFormat jf = e.getClass().getMethod("get" + StringUtils.capitalize(ef.attrName())).getAnnotation(JsonFormat.class);
+                    JsonFormat jf = e.getClass().getMethod("get" + StringUtils.capitalize(ef.attrName()))
+                            .getAnnotation(JsonFormat.class);
                     if (jf != null && jf.pattern() != null) {
                         dataFormat = jf.pattern();
                     }
@@ -564,7 +561,7 @@ public class ExcelExport {
     public ExcelExport write(HttpServletResponse response, String fileName) {
         response.reset();
         response.setContentType("application/octet-stream; charset=utf-8");
-        response.setHeader("Content-Disposition", "attachment; filename=" + EncodeUtils.encodeUrl(fileName));
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         try {
             write(response.getOutputStream());
         } catch (IOException ex) {

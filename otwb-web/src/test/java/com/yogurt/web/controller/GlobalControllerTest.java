@@ -1,6 +1,6 @@
 package com.yogurt.web.controller;
 
-import com.yogurt.web.controller.global.GlobalController;
+import com.yogurt.web.controller.global.VersionController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ public class GlobalControllerTest {
 
     @Before
     public void install() {
-        mvc = MockMvcBuilders.standaloneSetup(new GlobalController()).build();
+        mvc = MockMvcBuilders.standaloneSetup(new VersionController()).build();
     }
 
     @Test

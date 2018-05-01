@@ -30,7 +30,7 @@ public class VersionController extends BaseController {
     @PostMapping(value = "/global/version",
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
             consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseMessage addUser(@RequestBody VersionVO versionVO) {
+    public ResponseMessage addVersion(@RequestBody VersionVO versionVO) {
         if (versionService.addEntity(versionVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
         } else {
@@ -44,7 +44,7 @@ public class VersionController extends BaseController {
     })
     @ResponseBody
     @PutMapping("/global/version/{id}")
-    public ResponseMessage updateUser(@PathVariable String id, @RequestBody VersionVO versionVO) {
+    public ResponseMessage updateVersion(@PathVariable String id, @RequestBody VersionVO versionVO) {
         versionVO.setId(id);
         if (versionService.updateEntity(versionVO)) {
             return new ResponseMessage(ResultCode.SUCCESS, true);
@@ -57,7 +57,7 @@ public class VersionController extends BaseController {
     @ApiImplicitParam(name = "id", value = "ID", dataType = "string", required = true, paramType = "path")
     @ResponseBody
     @GetMapping("/global/version/{id}")
-    public ResponseMessage findUserById(@PathVariable String id) {
+    public ResponseMessage findVersionById(@PathVariable String id) {
         VersionVO versionVO = versionService.findEntityById(id);
         return new ResponseMessage(ResultCode.SUCCESS, versionVO);
     }
@@ -69,7 +69,7 @@ public class VersionController extends BaseController {
     })
     @ResponseBody
     @GetMapping("/global/versionList")
-    public ResponseMessage findUserListByPage(@RequestParam(required = false, defaultValue = "1") int pageNum,
+    public ResponseMessage findVersionListByPage(@RequestParam(required = false, defaultValue = "1") int pageNum,
                                               @RequestParam(required = false, defaultValue = "10") int pageSize) {
         PageInfo<VersionVO> pageInfo = versionService.findEntityListByPage(pageNum, pageSize);
         return new ResponseMessage(ResultCode.SUCCESS, pageInfo);
