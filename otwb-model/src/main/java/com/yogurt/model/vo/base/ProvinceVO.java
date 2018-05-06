@@ -13,7 +13,7 @@ import java.util.Optional;
 @ApiModel
 @EqualsAndHashCode(callSuper = true)
 public class ProvinceVO extends ViewObject<Province> {
-    @ApiModelProperty("ID")
+    @ApiModelProperty(value = "ID",hidden = true)
     String id;
 
     @ApiModelProperty("编码")
