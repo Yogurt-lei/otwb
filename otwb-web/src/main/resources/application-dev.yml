@@ -9,23 +9,6 @@ otwb:
     model: otwb
     enable-captcha: false
 
-# default logger config
-logging:
-  level:
-    root: debug
-    springfox.documentation: warn
-    org.springframework: warn
-    org.hibernate: warn
-    org.thymeleaf: warn
-    org.apache: warn
-    org.quartz: warn
-    io.swagger: warn
-    org.zbus: warn
-    sun.rmi: warn
-  file:
-    max-history: 7
-    max-size: 500MB
-
 spring:
   # default druid config
   datasource:
@@ -65,13 +48,6 @@ spring:
       enabled: true
       max-request-size: 50MB
       max-file-size: 50MB
-# default thymeleaf config
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML
-    encoding: UTF-8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -109,3 +85,20 @@ mapper:
   mappers:
     - tk.mybatis.mapper.common.Mapper
     - tk.mybatis.mapper.common.MySqlMapper #mysql特有
+
+# default logger config
+logging:
+  level:
+    root: debug
+    springfox.documentation: warn
+    org.springframework: warn
+    org.hibernate: warn
+    org.thymeleaf: warn
+    org.apache: warn
+    org.quartz: warn
+    io.swagger: warn
+    org.zbus: warn
+    sun.rmi: warn
+  file:
+    max-history: 7
+    max-size: 500MB

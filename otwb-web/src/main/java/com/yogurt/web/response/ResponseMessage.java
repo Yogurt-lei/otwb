@@ -35,4 +35,10 @@ public class ResponseMessage {
         this.msg = resultCode.getMsg();
         this.data = data;
     }
+
+    public ResponseMessage(ResultCode resultCode) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
+        this.data = "";
+    }
 }
